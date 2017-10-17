@@ -418,4 +418,26 @@ class Video extends Base
         return (boolean)$this->assetOrProgram->isPublished;
     }
 
+    /**
+     * Return Json_encoded video sources
+     *
+     * @return string source URL Json encoded
+     */
+    public function getHttpSrc()
+    {
+        $arraySrc = false;
+
+        if (isset($this->assetOrProgram->assetFiles)) {
+            $assets = $this->assetOrProgram->assetFiles;
+            if (is_array($assets) && count($assets) > 0) {
+                $arraySrc = array();
+                for ($i = 0; $i < count($assets); $i++) {
+                    $arraySrc[$assets[$i]['videoHeight']] = $assets[$i]['http_url'];
+                }
+            }
+        }
+
+        return json_encode($arraySrc);
+    }
+
 }
