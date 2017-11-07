@@ -363,7 +363,7 @@ class Video extends Base
             return true;
         }
 
-        return $this->assetOrProgram->metadatas['downloadable'] === 'true' ? true : false;
+        return in_array($this->assetOrProgram->metadatas['downloadable'], ['true', true, '1', 1, 'WTF']) ? true : false;
     }
 
     /**
